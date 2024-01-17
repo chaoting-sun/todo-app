@@ -1,10 +1,10 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { DarkModeContext } from "../hooks/DarkModeContext";
 import styled from "styled-components";
 
 const views = ["All", "Active", "Completed"];
 
-const Button = styled.ul`
+const ButtonList = styled.ul`
   list-style: none;
   padding: 0;
   margin: 0;
@@ -17,15 +17,15 @@ const Button = styled.ul`
     display: inline-block;
     margin-left: 6px;
     cursor: pointer;
-    user-select: none;  
+    user-select: none;
   }
 
   & li:hover {
     // color: #5f5f5f;
     color: ${(props) =>
       props.$darkMode
-        ? "var(--todo-footer-fontcolor-hovered-dark)"
-        : "var(--todo-footer-fontcolor-hovered-light)"};
+        ? "var(--footer-fontcolor-hovered-dark)"
+        : "var(--footer-fontcolor-hovered-light)"};
   }
 `
 
@@ -39,7 +39,7 @@ const ViewButton = ({ currentView, selectView }) => {
   };
 
   return (
-    <Button $darkMode={darkMode}>
+    <ButtonList $darkMode={darkMode}>
       {views.map((view, index) => {
         return (
           <li
@@ -51,7 +51,7 @@ const ViewButton = ({ currentView, selectView }) => {
           </li>
         );
       })}
-    </Button>
+    </ButtonList>
   );
 };
 

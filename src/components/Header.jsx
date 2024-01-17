@@ -5,7 +5,7 @@ import styled from "styled-components";
 const Title = styled.div`
   height: 100%;
   color: white;
-  font-size: 3.8em;
+  font-size: 3.2em;
   font-family: "Josefin Sans", sans-serif;
   display: inline-block;
 `
@@ -16,7 +16,7 @@ const Icon = styled.div`
 `
 
 const IconImg = styled.img`
-  height: 45px;
+  height: 40px;
   cursor: pointer;
 `
 

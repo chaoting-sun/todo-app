@@ -1,14 +1,31 @@
 :root {
-  --todo-card-light: #ffffff;
-  --todo-card-dark: #32323d;
-  --todo-card-fonttype: "Andika", sans-serif;
-  --todo-footer-fontcolor: #6f788d;
-  --todo-footer-fontcolor-hovered-light: #3d3d3d;
-  --todo-footer-fontcolor-hovered-dark: #c7c7c7;
+  --card-light: #ffffff;
+  --card-dark: #32323d;
+  --card-fonttype: "Andika", sans-serif;
+  --item-fontcolor-light: #5f5f5f;
+  --item-fontcolor-dark: #dbdbdb;
+  --item-fontcolor-checked-light: #b5b5b5;
+  --item-fontcolor-checked-dark: #5f5f5f;
+  --footer-fontcolor: #6f788d;
+  --footer-fontcolor-hovered-light: #3d3d3d;
+  --footer-fontcolor-hovered-dark: #c7c7c7;
+
+  --checkbox-border-gradient: radial-gradient(
+    circle at top left,
+    rgba(146, 178, 247, 1),
+    rgba(118, 55, 187, 1)
+  );
+
+  --checkbox-content-gradient: linear-gradient(
+    circle at top left,
+    rgba(146, 178, 247, 1),
+    rgba(118, 55, 187, 1)
+  );
+
   --custom-gradient: linear-gradient(
     135deg,
     rgba(146, 178, 247, 1) 0%,
-    rgba(89, 148,a 237, 1) 37%,
+    rgba(89, 148, a 237, 1) 37%,
     rgba(118, 55, 187, 1) 100%
   );
   --custom-shadow: rgba(0, 0, 0, 0.07) 0px 1px 2px,
@@ -17,9 +34,16 @@
     rgba(0, 0, 0, 0.07) 0px 32px 64px;
 }
 
+::-ms-input-placeholder {
+  color: rgba(202, 202, 202, 0.632);
+}
+
+::placeholder {
+  color: rgb(202, 202, 202, 0.632);
+}
+
 input:focus {
   outline: none;
-  /* color: #46464d; */
 }
 
 .scene-dark {
@@ -32,7 +56,7 @@ input:focus {
 }
 
 .view-selected {
-  color: rgb(21, 71, 221) !important;
+  color: rgb(32, 84, 241) !important;
 }
 
 #root {

@@ -5,7 +5,7 @@ import styled from "styled-components";
 
 const Footer = styled.div`
   background-color: ${(props) =>
-    props.$darkMode ? "var(--todo-card-dark)" : "var(--todo-card-light)"};
+    props.$darkMode ? "var(--card-dark)" : "var(--card-light)"};
   width: 100%;
   height: 60px;
   position: relative;
@@ -15,13 +15,13 @@ const Footer = styled.div`
   align-items: center;
 
   & * {
-    color: var(--todo-footer-fontcolor);
-    font-family: var(--todo-card-fonttype);
+    color: var(--footer-fontcolor);
+    font-family: var(--card-fonttype);
   }
 `;
 
 const Count = styled.span`
-  // color: var(--todo-footer-fontcolor);
+  // color: var(--footer-fontcolor);
   font-size: 0.8em;
   display: inline-block;
   width: 25%;
@@ -43,8 +43,8 @@ const Clear = styled.span`
     cursor: pointer;
     color: ${(props) =>
       props.$darkMode
-        ? "var(--todo-footer-fontcolor-hovered-dark)"
-        : "var(--todo-footer-fontcolor-hovered-light)"};
+        ? "var(--footer-fontcolor-hovered-dark)"
+        : "var(--footer-fontcolor-hovered-light)"};
   }
 `;
 

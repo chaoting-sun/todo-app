@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { DarkModeContext } from "../hooks/DarkModeContext";
 
 const Input = styled.div`
-  background-color: ${(props) => props.$darkMode ? "var(--todo-card-dark)" : "var(--todo-card-light)"};
+  background-color: ${(props) => props.$darkMode ? "var(--card-dark)" : "var(--card-light)"};
   width: 100%;
   height: 75px;
   margin: 40px;
@@ -13,11 +13,11 @@ const Input = styled.div`
     width: calc(100% - 70px);
     height: 100%;
     font-size: 1.1em;
-    font-family: var(--todo-card-fonttype);
+    font-family: var(--card-fonttype);
     padding: 0;
     margin-left: 70px;
-    color: rgb(95, 95, 95);
-    background-color: ${(props) => props.$darkMode ? "var(--todo-card-dark)" : "var(--todo-card-light)"};
+    color: ${(props) => props.$darkMode ? "var(--item-fontcolor-dark)" : "var(--item-fontcolor-light)" };
+    background-color: ${(props) => props.$darkMode ? "var(--card-dark)" : "var(--card-light)"};
     border: white;
     border-radius: 6px;
     box-sizing: border-box;
