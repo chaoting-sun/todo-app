@@ -15,8 +15,8 @@ const Scenery = () => {
     <SceneryImg
       src={
         darkMode
-          ? "src/images/bg-desktop-dark.jpg"
-          : "src/images/bg-desktop-light.jpg"
+          ? "assets/bg-desktop-dark.jpg"
+          : "assets/bg-desktop-light.jpg"
       }
       className="scenery"
     />
