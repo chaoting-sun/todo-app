@@ -5,12 +5,21 @@ import TodoInput from "../components/TodoInput";
 import TodoMain from "../components/TodoMain";
 import TodoFooter from "../components/TodoFooter";
 import { DarkModeContext } from "../hooks/DarkModeContext";
+import styled from "styled-components";
 
 const currentTodos = [
   { id: 0, detail: "this is 1.", isCompleted: false },
   { id: 1, detail: "this is 2.", isCompleted: false },
 ];
 let nextTodoId = 2;
+
+const Reminder = styled.div`
+  color: #a4a4a4;
+  width: 100%;
+  margin-top: 35px;
+  font-family: var(--card-fonttype);
+  text-align: center;
+`
 
 const statusFilter = {
   All: () => true,
@@ -82,6 +91,9 @@ const Root = () => {
           selectView={selectView}
           clearCompleted={clearCompleted}
         />
+        <Reminder>
+          Drag and drop to reorder list
+        </Reminder>
       </div>
     </>
   );
