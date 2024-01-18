@@ -4,7 +4,7 @@ import TodoHeader from "../components/TodoHeader";
 import TodoInput from "../components/TodoInput";
 import TodoMain from "../components/TodoMain";
 import TodoFooter from "../components/TodoFooter";
-import CurrentTodos from "../database/currentTodos";
+import CurrentTodos from "../database/CurrentTodos";
 import { DarkModeContext } from "../hooks/DarkModeContext";
 import styled from "styled-components";
 
