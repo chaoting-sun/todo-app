@@ -127,9 +127,7 @@ const TodoItem = ({
   });
 
   drag(drop(ref));
-
-  console.log("on hover:", onHover);
-
+  
   return (
     <Item
       ref={ref}

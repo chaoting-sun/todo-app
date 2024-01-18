@@ -79,7 +79,7 @@ const Checkbox = ({ id, isCompleted, toggleTodo }) => {
         $isCompleted={isCompleted}
       >
         {isCompleted && (
-          <img style={{ zIndex: 1 }} src="/src/images/icon-check.svg" />
+          <img style={{ zIndex: 1 }} src="../images/icon-check.svg" />
         )}
       </Label>
     </Box>
