@@ -25,6 +25,17 @@ The **Todo App** has the following function:
 - Javascript
 - React
 - Material UI
+- Vite
+
+## Run Locally
+
+```bash
+git clone git@github.com:chaoting-sun/todo-app.git
+cd todo-app
+
+npm install
+npm run dev
+```
 
 ## Future Work
 - View the optimal layout for the app depending on their device's screen size
