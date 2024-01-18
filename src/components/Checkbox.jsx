@@ -1,12 +1,32 @@
 import React, { useContext, useState } from "react";
 import { DarkModeContext } from "../hooks/DarkModeContext";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import "../App.css";
 
 const getBackgroundImage = (props) =>
   props.$darkMode ? "var(--card-dark)" : "#ffffff";
 
-const CheckLabel = styled.label`
+const Box = styled.div`
+  height: 100%;
+  width: 70px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+
+  & img {
+    width: 16px;
+    position: absolute;
+    cursor: pointer;
+    user-select: none;  
+  }
+
+  & input {
+    position: absolute;
+  }
+`
+
+const Label = styled.label`
   height: 23px;
   width: 23px;
   box-sizing: border-box;
@@ -30,39 +50,39 @@ const CheckLabel = styled.label`
     background-clip: content-box, border-box;
   }
 
-  input[type="checkbox"]:checked + & {
-    border: 11.5px solid transparent;
-    border-color: transparent;
-    background-image: linear-gradient(white, white),
-      var(--checkbox-border-gradient);
-    background-origin: border-box;
-    background-clip: content-box, border-box;
-  }
+  ${(props) =>
+    props.$isCompleted &&
+    css`
+      border: 12px solid transparent !important;
+      border-color: transparent !important;
+      background-image: linear-gradient(white, white),
+        var(--checkbox-border-gradient) !important;
+      background-origin: border-box !important;
+      background-clip: content-box, border-box !important;
+    `}
 `;
 
 const Checkbox = ({ id, isCompleted, toggleTodo }) => {
   const { darkMode } = useContext(DarkModeContext);
-  const [onHovered, setOnHovered] = useState(false);
 
-  const handleEnter = () => setOnHovered(true);
-  const handleLeave = () => setOnHovered(false);
   const handleCheck = () => {
     toggleTodo(id);
     console.log("handleCheck:", id);
   };
 
   return (
-    <div className="checkbox">
+    <Box>
       <input id={id} type="checkbox" onClick={handleCheck} />
-      <CheckLabel
+      <Label
         htmlFor={id}
-        onMouseEnter={handleEnter}
-        onMouseLeave={handleLeave}
         $darkMode={darkMode}
+        $isCompleted={isCompleted}
       >
-        {isCompleted && <img src="/src/images/icon-check.svg" />}
-      </CheckLabel>
-    </div>
+        {isCompleted && (
+          <img style={{ zIndex: 1 }} src="/src/images/icon-check.svg" />
+        )}
+      </Label>
+    </Box>
   );
 };
 

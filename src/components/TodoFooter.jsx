@@ -21,7 +21,6 @@ const Footer = styled.div`
 `;
 
 const Count = styled.span`
-  // color: var(--footer-fontcolor);
   font-size: 0.8em;
   display: inline-block;
   width: 25%;

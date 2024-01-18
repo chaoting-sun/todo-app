@@ -2,6 +2,15 @@ import React, { useContext } from "react";
 import { DarkModeContext } from "../hooks/DarkModeContext";
 import styled from "styled-components";
 
+const Header = styled.div`
+  width: 100%;
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  margin-top: 80px;
+  margin-bottom: 0px;
+`
+
 const Title = styled.div`
   height: 100%;
   color: white;
@@ -20,11 +29,11 @@ const IconImg = styled.img`
   cursor: pointer;
 `
 
-const Header = () => {
+const TodoHeader = () => {
   const {darkMode, toggleDarkMode} = useContext(DarkModeContext);
 
   return (
-    <div className="todo-header">
+    <Header>
       <Title>TODO</Title>
       <Icon>
         <IconImg
@@ -32,8 +41,8 @@ const Header = () => {
           onClick={toggleDarkMode}        
         />
       </Icon>
-    </div>
+    </Header>
   );
 };
 
-export default Header;
+export default TodoHeader;

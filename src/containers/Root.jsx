@@ -1,6 +1,6 @@
 import React, { useContext, useState } from "react";
 import Scenery from "../components/Scenery";
-import Header from "../components/Header";
+import TodoHeader from "../components/TodoHeader";
 import TodoInput from "../components/TodoInput";
 import TodoMain from "../components/TodoMain";
 import TodoFooter from "../components/TodoFooter";
@@ -67,7 +67,7 @@ const Root = () => {
     <>
       <Scenery />
       <div id="todo-card">
-        <Header />
+        <TodoHeader />
         <TodoInput addTodo={addTodo} />
         <TodoMain
           todos={todos}

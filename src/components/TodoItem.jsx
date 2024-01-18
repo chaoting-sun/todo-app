@@ -25,6 +25,7 @@ const Item = styled.div`
   position: relative;
   background-color: ${(props) =>
     props.$darkMode ? "var(--card-dark)" : "var(--card-light)"};
+  cursor: grab;
 `;
 
 const Detail = styled.p`
@@ -37,6 +38,18 @@ const Detail = styled.p`
   margin: 0;
 `;
 
+const RemoveIcon = styled.div`
+  position: absolute;
+  display: inline-block;
+  right: 20px;
+
+  & img {
+    width: 13px;
+    height: 13px;
+    cursor: pointer;  
+  }
+`
+
 const TodoItem = ({
   id,
   index,
@@ -47,6 +60,9 @@ const TodoItem = ({
   moveTodo,
 }) => {
   const { darkMode } = useContext(DarkModeContext);
+  
+  // reference: https://react-dnd.github.io/react-dnd/examples/sortable/simple
+  
   const ref = useRef(null);
 
   const [{ handlerId }, drop] = useDrop({
@@ -98,21 +114,13 @@ const TodoItem = ({
 
   const [{ isDragging }, drag] = useDrag({
     type: ItemTypes.TODO,
-    item: { id, index },
+    item: () => {
+      return { id, index };
+    },
     collect: (monitor) => ({
       isDragging: monitor.isDragging(),
     }),
   });
-
-  // const [{ isDragging }, drag] = useDrag({
-  //   type: ItemTypes.CARD,
-  //   item: () => {
-  //     return { id, index };
-  //   },
-  //   collect: (monitor) => ({
-  //     isDragging: monitor.isDragging(),
-  //   }),
-  // });
 
   drag(drop(ref));
 
@@ -125,17 +133,13 @@ const TodoItem = ({
       data-hanlder-id={handlerId}
       $darkMode={darkMode}
     >
-      <Checkbox
-        id={id}
-        isCompleted={isCompleted}
-        toggleTodo={toggleTodo}
-      />
+      <Checkbox id={id} isCompleted={isCompleted} toggleTodo={toggleTodo} />
       <Detail $isCompleted={isCompleted} $darkMode={darkMode}>
         {detail}
       </Detail>
-      <div className="remove-icon">
+      <RemoveIcon>
         <img src="/src/images/icon-cross.svg" onClick={() => removeTodo(id)} />
-      </div>
+      </RemoveIcon>
     </Item>
   );
 };
