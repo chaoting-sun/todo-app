@@ -1,7 +1,9 @@
-import React, { useContext, useState } from "react";
-import Checkbox from "./Checkbox";
+import React, { useContext, useRef, useState } from "react";
 import styled from "styled-components";
 import { DarkModeContext } from "../hooks/DarkModeContext";
+import { useDrag, useDrop } from "react-dnd";
+import Checkbox from "./Checkbox";
+import ItemTypes from "./ItemTypes";
 
 const getDetailColor = (isCompleted, darkMode) => {
   if (isCompleted && darkMode) return "var(--item-fontcolor-checked-dark)";
@@ -21,7 +23,6 @@ const Item = styled.div`
   justify-content: flex-start;
   align-items: center;
   position: relative;
-  border-radius: ${(props) => (props.$id === 0 ? "6px 6px 0px 0px" : "")};
   background-color: ${(props) =>
     props.$darkMode ? "var(--card-dark)" : "var(--card-light)"};
 `;
@@ -36,25 +37,104 @@ const Detail = styled.p`
   margin: 0;
 `;
 
-const TodoItem = ({ id, item, toggleTodo, removeTodo }) => {
+const TodoItem = ({
+  id,
+  index,
+  detail,
+  isCompleted,
+  toggleTodo,
+  removeTodo,
+  moveTodo,
+}) => {
   const { darkMode } = useContext(DarkModeContext);
+  const ref = useRef(null);
 
-  console.log("dark mode:", darkMode);
+  const [{ handlerId }, drop] = useDrop({
+    accept: ItemTypes.TODO,
+    collect(monitor) {
+      return {
+        handlerId: monitor.getHandlerId(),
+      };
+    },
+    hover(item, monitor) {
+      if (!ref.current) {
+        return;
+      }
+      const dragId = item.index;
+      const hoverId = index;
+      // Don't replace items with themselves
+      if (dragId === hoverId) {
+        return;
+      }
+      // Determine rectangle on screen
+      const hoverBoundingRect = ref.current?.getBoundingClientRect();
+      // Get vertical middle
+      const hoverMiddleY =
+        (hoverBoundingRect.bottom - hoverBoundingRect.top) / 2;
+      // Determine mouse position
+      const clientOffset = monitor.getClientOffset();
+      // Get pixels to the top
+      const hoverClientY = clientOffset.y - hoverBoundingRect.top;
+      // Only perform the move when the mouse has crossed half of the items height
+      // When dragging downwards, only move when the cursor is below 50%
+      // When dragging upwards, only move when the cursor is above 50%
+      // Dragging downwards
+      if (dragId < hoverId && hoverClientY < hoverMiddleY) {
+        return;
+      }
+      // Dragging upwards
+      if (dragId > hoverId && hoverClientY > hoverMiddleY) {
+        return;
+      }
+      // Time to actually perform the action
+      moveTodo(dragId, hoverId);
+      // Note: we're mutating the monitor item here!
+      // Generally it's better to avoid mutations,
+      // but it's good here for the sake of performance
+      // to avoid expensive index searches.
+      item.index = hoverId;
+    },
+  });
+
+  const [{ isDragging }, drag] = useDrag({
+    type: ItemTypes.TODO,
+    item: { id, index },
+    collect: (monitor) => ({
+      isDragging: monitor.isDragging(),
+    }),
+  });
+
+  // const [{ isDragging }, drag] = useDrag({
+  //   type: ItemTypes.CARD,
+  //   item: () => {
+  //     return { id, index };
+  //   },
+  //   collect: (monitor) => ({
+  //     isDragging: monitor.isDragging(),
+  //   }),
+  // });
+
+  drag(drop(ref));
+
+  const opacity = isDragging ? 0 : 1;
+
   return (
-    <Item $id={id} $darkMode={darkMode}>
+    <Item
+      ref={ref}
+      style={{ opacity }}
+      data-hanlder-id={handlerId}
+      $darkMode={darkMode}
+    >
       <Checkbox
-        id={item.id}
-        isCompleted={item.isCompleted}
+        id={id}
+        isCompleted={isCompleted}
         toggleTodo={toggleTodo}
       />
-      <Detail $isCompleted={item.isCompleted} $darkMode={darkMode}>
-        {item.detail}
+      <Detail $isCompleted={isCompleted} $darkMode={darkMode}>
+        {detail}
       </Detail>
       <div className="remove-icon">
-        <img
-          src="/src/images/icon-cross.svg"
-          onClick={() => removeTodo(item.id)}
-        />
+        <img src="/src/images/icon-cross.svg" onClick={() => removeTodo(id)} />
       </div>
     </Item>
   );

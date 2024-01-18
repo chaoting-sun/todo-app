@@ -6,16 +6,17 @@ import TodoMain from "../components/TodoMain";
 import TodoFooter from "../components/TodoFooter";
 import { DarkModeContext } from "../hooks/DarkModeContext";
 
+const currentTodos = [
+  { id: 0, detail: "this is 1.", isCompleted: false },
+  { id: 1, detail: "this is 2.", isCompleted: false },
+];
+let nextTodoId = 2;
+
 const statusFilter = {
   All: () => true,
   Active: (todo) => !todo.isCompleted,
   Completed: (todo) => todo.isCompleted,
 };
-
-const currentTodos = [
-  { id: 0, detail: "this is 1.", isCompleted: false },
-  { id: 1, detail: "this is 2.", isCompleted: false },
-];
 
 const Root = () => {
   const { darkMode } = useContext(DarkModeContext);
@@ -35,10 +36,14 @@ const Root = () => {
   };
 
   const addTodo = (todoDetail) => {
-    const newId = todos.length ? todos[todos.length - 1].id + 1 : 0;
     setTodos((todos) =>
-      todos.concat({ id: newId, detail: todoDetail, isCompleted: false })
+      todos.concat({
+        id: nextTodoId,
+        detail: todoDetail,
+        isCompleted: false,
+      })
     );
+    nextTodoId += 1;
   };
 
   const clearCompleted = () => {
@@ -51,6 +56,13 @@ const Root = () => {
 
   const selectView = (selectedView) => setCurrentView(selectedView);
 
+  const moveTodo = (dragId, hoverId) => {
+    const newTodos = [...todos];
+    newTodos.splice(dragId, 1);
+    newTodos.splice(hoverId, 0, todos[dragId]);
+    setTodos(newTodos);
+  };
+
   return (
     <>
       <Scenery />
@@ -62,6 +74,7 @@ const Root = () => {
           toggleTodo={toggleTodo}
           todoFilter={statusFilter[currentView]}
           removeTodo={removeTodo}
+          moveTodo={moveTodo}
         />
         <TodoFooter
           nLeftItems={todos.filter(({ isCompleted }) => !isCompleted).length}
