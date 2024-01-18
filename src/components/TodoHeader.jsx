@@ -18,7 +18,7 @@ const Title = styled.div`
   height: 100%;
   color: white;
   font-size: 3.2em;
-  font-family: "Josefin Sans", sans-serif;
+  font-family: var(--card-fonttype);
   display: inline-block;
   user-select: none;
 `;
@@ -41,7 +41,7 @@ const TodoHeader = () => {
 
   return (
     <Header>
-      <Title>TODO</Title>
+      <Title>T O D O</Title>
       <Icon>
         {darkMode ? (
           <WbSunnyIcon

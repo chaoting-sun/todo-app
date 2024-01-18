@@ -4,13 +4,10 @@ import TodoHeader from "../components/TodoHeader";
 import TodoInput from "../components/TodoInput";
 import TodoMain from "../components/TodoMain";
 import TodoFooter from "../components/TodoFooter";
+import CurrentTodos from "../database/currentTodos";
 import { DarkModeContext } from "../hooks/DarkModeContext";
 import styled from "styled-components";
 
-const currentTodos = [
-  { id: 0, detail: "this is 1.", isCompleted: false },
-  { id: 1, detail: "this is 2.", isCompleted: false },
-];
 let nextTodoId = 2;
 
 const Reminder = styled.div`
@@ -29,7 +26,7 @@ const statusFilter = {
 
 const Root = () => {
   const { darkMode } = useContext(DarkModeContext);
-  const [todos, setTodos] = useState(() => currentTodos);
+  const [todos, setTodos] = useState(() => CurrentTodos);
   const [currentView, setCurrentView] = useState("All");
 
   const toggleTodo = (id) => {

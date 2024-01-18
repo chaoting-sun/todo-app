@@ -48,7 +48,7 @@ const RemoveIcon = styled.div`
   justify-content: center;
   align-items: center;
   color: #bebebe;
-  border: 2px solid ${(props) => (props.$onHover ? "#bebebe" : "#ffffff")};
+  border: 2px solid ${(props) => (props.$onHover ? "#bebebe" : "transparent")};
   border-radius: 50%;
   cursor: pointer;
 `;
@@ -143,7 +143,7 @@ const TodoItem = ({
         {detail}
       </Detail>
       <RemoveIcon $onHover={onHover}>
-        <CloseIcon onClick={() => removeTodo(id)}></CloseIcon>
+        <CloseIcon onClick={() => removeTodo(id)} ></CloseIcon>
       </RemoveIcon>
     </Item>
   );
