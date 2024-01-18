@@ -47,13 +47,13 @@ const TodoHeader = () => {
           <WbSunnyIcon
             onClick={toggleDarkMode}
             style={IconStyles}
-            sx={{ "&:hover": { color: "#ffaeae !important" } }}
+            sx={{ "&:hover": { color: "#ff0000 !important" } }}
           />
         ) : (
           <DarkModeIcon
             onClick={toggleDarkMode}
             style={IconStyles}
-            sx={{ "&:hover": { color: "#fffaae !important" } }}
+            sx={{ "&:hover": { color: "#ffff00 !important" } }}
           />
         )}
       </Icon>

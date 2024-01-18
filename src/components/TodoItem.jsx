@@ -4,6 +4,7 @@ import { DarkModeContext } from "../hooks/DarkModeContext";
 import { useDrag, useDrop } from "react-dnd";
 import Checkbox from "./Checkbox";
 import ItemTypes from "./ItemTypes";
+import CloseIcon from "@mui/icons-material/Close";
 
 const getDetailColor = (isCompleted, darkMode) => {
   if (isCompleted && darkMode) return "var(--item-fontcolor-checked-dark)";
@@ -29,7 +30,6 @@ const Item = styled.div`
 `;
 
 const Detail = styled.p`
-  // color: ${(props) => (props.$isCompleted ? "#b5b5b5" : "#5f5f5f")};
   color: ${(props) => getDetailColor(props.$isCompleted, props.$darkMode)};
   text-decoration: ${(props) => (props.$isCompleted ? "line-through" : "none")};
   text-decoration-thickness: ${(props) => (props.$isCompleted ? "1px" : "0")};
@@ -39,16 +39,19 @@ const Detail = styled.p`
 `;
 
 const RemoveIcon = styled.div`
+  height: 20px;
+  width: 20px;
+  box-sizing: border-box;
   position: absolute;
-  display: inline-block;
   right: 20px;
-
-  & img {
-    width: 13px;
-    height: 13px;
-    cursor: pointer;  
-  }
-`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #bebebe;
+  border: 2px solid ${(props) => (props.$onHover ? "#bebebe" : "#ffffff")};
+  border-radius: 50%;
+  cursor: pointer;
+`;
 
 const TodoItem = ({
   id,
@@ -60,9 +63,10 @@ const TodoItem = ({
   moveTodo,
 }) => {
   const { darkMode } = useContext(DarkModeContext);
-  
+  const [onHover, setOnHover] = useState(false);
+
   // reference: https://react-dnd.github.io/react-dnd/examples/sortable/simple
-  
+
   const ref = useRef(null);
 
   const [{ handlerId }, drop] = useDrop({
@@ -124,12 +128,13 @@ const TodoItem = ({
 
   drag(drop(ref));
 
-  const opacity = isDragging ? 0 : 1;
+  console.log("on hover:", onHover);
 
   return (
     <Item
       ref={ref}
-      style={{ opacity }}
+      onMouseEnter={() => setOnHover(true)}
+      onMouseLeave={() => setOnHover(false)}
       data-hanlder-id={handlerId}
       $darkMode={darkMode}
     >
@@ -137,8 +142,8 @@ const TodoItem = ({
       <Detail $isCompleted={isCompleted} $darkMode={darkMode}>
         {detail}
       </Detail>
-      <RemoveIcon>
-        <img src="/src/images/icon-cross.svg" onClick={() => removeTodo(id)} />
+      <RemoveIcon $onHover={onHover}>
+        <CloseIcon onClick={() => removeTodo(id)}></CloseIcon>
       </RemoveIcon>
     </Item>
   );
