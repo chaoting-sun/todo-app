@@ -34,17 +34,12 @@
     rgba(0, 0, 0, 0.07) 0px 32px 64px;
 }
 
-body {
-  height: 100vh;
-  margin: 0;
-}
-
 ::-ms-input-placeholder {
-  color: rgba(202, 202, 202, 0.632);
+  color: rgba(167, 167, 167, 0.632);
 }
 
 ::placeholder {
-  color: rgb(202, 202, 202, 0.632);
+  color: rgba(167, 167, 167, 0.632);
 }
 
 input:focus {
@@ -74,6 +69,11 @@ input[type="checkbox"] {
   display: flex;
   justify-content: center;
   align-items: flex-start;
+}
+
+body {
+  height: 100vh;
+  margin: 0;
 }
 
 #todo-card {

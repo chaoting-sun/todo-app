@@ -30,12 +30,12 @@ const Item = styled.div`
 `;
 
 const Detail = styled.p`
+  margin-right: 45px;
   color: ${(props) => getDetailColor(props.$isCompleted, props.$darkMode)};
   text-decoration: ${(props) => (props.$isCompleted ? "line-through" : "none")};
   text-decoration-thickness: ${(props) => (props.$isCompleted ? "1px" : "0")};
   font-size: 1.1em;
   font-family: var(--card-fonttype);
-  margin: 0;
 `;
 
 const RemoveIcon = styled.div`
@@ -127,8 +127,6 @@ const TodoItem = ({
   });
 
   drag(drop(ref));
-
-  console.log("on hover:", onHover);
 
   return (
     <Item
