@@ -17,6 +17,7 @@ const Title = styled.div`
   font-size: 3.2em;
   font-family: "Josefin Sans", sans-serif;
   display: inline-block;
+  user-select: none;
 `
 
 const Icon = styled.div`
@@ -26,6 +27,7 @@ const Icon = styled.div`
 
 const IconImg = styled.img`
   height: 40px;
+  user-select: none;
   cursor: pointer;
 `
 
