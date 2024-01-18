@@ -25,6 +25,7 @@ The **Todo App** has the following function:
 - Javascript
 - React
 - Material UI
+- styled components
 - Vite
 
 ## Run Locally
