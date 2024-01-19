@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import { useContext } from "react";
 import { DarkModeContext } from "../hooks/DarkModeContext";
 import styled, { css } from "styled-components";
 import "../App.css";

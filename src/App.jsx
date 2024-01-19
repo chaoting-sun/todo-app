@@ -1,4 +1,3 @@
-import React, { useState } from "react";
 import Root from "./containers/Root";
 import { DarkModeProvider } from "./hooks/DarkModeContext";
 import "./App.css";

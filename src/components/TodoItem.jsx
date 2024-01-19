@@ -1,4 +1,4 @@
-import React, { useContext, useRef, useState } from "react";
+import { useContext, useRef, useState } from "react";
 import styled from "styled-components";
 import { DarkModeContext } from "../hooks/DarkModeContext";
 import { useDrag, useDrop } from "react-dnd";
@@ -116,7 +116,7 @@ const TodoItem = ({
     },
   });
 
-  const [{ isDragging }, drag] = useDrag({
+  const [{ }, drag] = useDrag({
     type: ItemTypes.TODO,
     item: () => {
       return { id, index };

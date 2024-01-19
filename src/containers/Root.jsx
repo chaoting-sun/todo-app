@@ -1,11 +1,10 @@
-import React, { useContext, useState } from "react";
+import { useState } from "react";
 import Scenery from "../components/Scenery";
 import TodoHeader from "../components/TodoHeader";
 import TodoInput from "../components/TodoInput";
 import TodoMain from "../components/TodoMain";
 import TodoFooter from "../components/TodoFooter";
 import CurrentTodos from "../database/CurrentTodos";
-import { DarkModeContext } from "../hooks/DarkModeContext";
 import styled from "styled-components";
 
 let nextTodoId = 2;
@@ -25,7 +24,6 @@ const statusFilter = {
 };
 
 const Root = () => {
-  const { darkMode } = useContext(DarkModeContext);
   const [todos, setTodos] = useState(() => CurrentTodos);
   const [currentView, setCurrentView] = useState("All");
 
