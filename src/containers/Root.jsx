@@ -6,8 +6,7 @@ import TodoMain from "../components/TodoMain";
 import TodoFooter from "../components/TodoFooter";
 import CurrentTodos from "../database/CurrentTodos";
 import styled from "styled-components";
-
-let nextTodoId = 2;
+import { nanoid } from "nanoid";
 
 const Reminder = styled.div`
   color: #a4a4a4;
@@ -42,12 +41,11 @@ const Root = () => {
   const addTodo = (todoDetail) => {
     setTodos((todos) =>
       todos.concat({
-        id: nextTodoId,
+        id: nanoid(),
         detail: todoDetail,
         isCompleted: false,
       })
     );
-    nextTodoId += 1;
   };
 
   const clearCompleted = () => {

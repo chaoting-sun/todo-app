@@ -1,11 +1,13 @@
+import { nanoid } from "nanoid";
+
 const CurrentTodos = [
   {
-    id: 0,
+    id: nanoid(),
     detail: "Clean my room before Chinese new year.",
     isCompleted: false,
   },
   {
-    id: 1,
+    id: nanoid(),
     detail: "Learn to build a todo app in three days.",
     isCompleted: false,
   },
