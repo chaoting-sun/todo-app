@@ -1,6 +1,6 @@
-import { useContext, useRef, useState } from "react";
+import { memo, useContext, useRef, useState } from "react";
 import styled from "styled-components";
-import { DarkModeContext } from "../hooks/DarkModeContext";
+import ModeContext from "../hooks/ModeContext";
 import { useDrag, useDrop } from "react-dnd";
 import Checkbox from "./Checkbox";
 import ItemTypes from "./ItemTypes";
@@ -53,7 +53,7 @@ const RemoveIcon = styled.div`
   cursor: pointer;
 `;
 
-const TodoItem = ({
+const TodoItem = memo(function TodoItem({
   id,
   index,
   detail,
@@ -61,8 +61,8 @@ const TodoItem = ({
   toggleTodo,
   removeTodo,
   moveTodo,
-}) => {
-  const { darkMode } = useContext(DarkModeContext);
+}) {
+  const { darkMode } = useContext(ModeContext);
   const [onHover, setOnHover] = useState(false);
 
   // reference: https://react-dnd.github.io/react-dnd/examples/sortable/simple
@@ -116,7 +116,7 @@ const TodoItem = ({
     },
   });
 
-  const [{ }, drag] = useDrag({
+  const [{ isDragging }, drag] = useDrag({
     type: ItemTypes.TODO,
     item: () => {
       return { id, index };
@@ -141,10 +141,10 @@ const TodoItem = ({
         {detail}
       </Detail>
       <RemoveIcon $onHover={onHover}>
-        <CloseIcon onClick={() => removeTodo(id)} ></CloseIcon>
+        <CloseIcon onClick={() => removeTodo(id)}></CloseIcon>
       </RemoveIcon>
     </Item>
   );
-};
+});
 
 export default TodoItem;

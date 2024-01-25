@@ -1,12 +1,12 @@
 import Root from "./containers/Root";
-import { DarkModeProvider } from "./hooks/DarkModeContext";
+import ModeProvider from "./hooks/ModeProvider";
 import "./App.css";
 
 const App = () => {
   return (
-    <DarkModeProvider>
+    <ModeProvider>
       <Root />
-    </DarkModeProvider>
+    </ModeProvider>
   )
 };
 

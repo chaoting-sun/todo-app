@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import ViewButton from "./ViewButton";
-import { DarkModeContext } from "../hooks/DarkModeContext";
+import ModeContext from "../hooks/ModeContext";
 import styled from "styled-components";
 
 const Footer = styled.div`
@@ -53,7 +53,7 @@ const TodoFooter = ({
   selectView,
   clearCompleted,
 }) => {
-  const { darkMode } = useContext(DarkModeContext);
+  const { darkMode } = useContext(ModeContext);
 
   return (
     <Footer $darkMode={darkMode}>

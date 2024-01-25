@@ -1,6 +1,6 @@
 import { useContext, useState } from "react";
 import styled from "styled-components";
-import { DarkModeContext } from "../hooks/DarkModeContext";
+import ModeContext from "../hooks/ModeContext";
 
 const Input = styled.div`
   background-color: ${(props) => props.$darkMode ? "var(--card-dark)" : "var(--card-light)"};
@@ -25,7 +25,7 @@ const Input = styled.div`
 `
 
 const TodoInput = ({ addTodo }) => {
-  const { darkMode } = useContext(DarkModeContext);
+  const { darkMode } = useContext(ModeContext);
   const [inputText, setInputText] = useState("");
 
   const handleKeyPress = (e) => {

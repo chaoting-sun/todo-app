@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { DarkModeContext } from "../hooks/DarkModeContext";
+import ModeContext from "../hooks/ModeContext";
 import styled from "styled-components";
 
 const views = ["All", "Active", "Completed"];
@@ -21,16 +21,15 @@ const ButtonList = styled.ul`
   }
 
   & li:hover {
-    // color: #5f5f5f;
     color: ${(props) =>
       props.$darkMode
         ? "var(--footer-fontcolor-hovered-dark)"
         : "var(--footer-fontcolor-hovered-light)"};
   }
-`
+`;
 
 const ViewButton = ({ currentView, selectView }) => {
-  const { darkMode } = useContext(DarkModeContext);
+  const { darkMode } = useContext(ModeContext);
 
   const handleSelectView = (selectedView) => {
     if (selectedView !== currentView) {

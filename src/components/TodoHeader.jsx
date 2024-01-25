@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { DarkModeContext } from "../hooks/DarkModeContext";
+import ModeContext from "../hooks/ModeContext";
 import styled from "styled-components";
 import WbSunnyIcon from "@mui/icons-material/WbSunny";
 import DarkModeIcon from "@mui/icons-material/DarkMode";
@@ -11,7 +11,7 @@ const Header = styled.div`
   display: flex;
   justify-content: space-between;
   margin-top: 80px;
-  margin-bottom: 0px;
+  margin-bottom: 0;
 `;
 
 const Title = styled.div`
@@ -37,7 +37,7 @@ const IconStyles = {
 };
 
 const TodoHeader = () => {
-  const { darkMode, toggleDarkMode } = useContext(DarkModeContext);
+  const { darkMode, toggleDarkMode } = useContext(ModeContext);
 
   return (
     <Header>

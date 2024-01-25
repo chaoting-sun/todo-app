@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { DarkModeContext } from "../hooks/DarkModeContext";
+import ModeContext from "../hooks/ModeContext";
 import styled from "styled-components";
 
 const SceneryImg = styled.img`
@@ -9,7 +9,7 @@ const SceneryImg = styled.img`
 `;
 
 const Scenery = () => {
-  const { darkMode } = useContext(DarkModeContext);
+  const { darkMode } = useContext(ModeContext);
 
   return (
     <SceneryImg

@@ -50,7 +50,7 @@ input[type="checkbox"] {
   visibility: hidden;
 }
 
-.scene-dark {
+.background-dark {
   background-color: hsl(235, 21%, 11%) !important;
 }
 
@@ -62,9 +62,13 @@ input[type="checkbox"] {
   color: rgb(32, 84, 241) !important;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 #root {
   position: relative;
-  height: 100vh;
+  height: 100%;
   width: 100%;
   display: flex;
   justify-content: center;
@@ -72,7 +76,7 @@ input[type="checkbox"] {
 }
 
 body {
-  height: 100vh;
+  height: 100%;
   margin: 0;
 }
 

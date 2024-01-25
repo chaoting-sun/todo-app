@@ -1,12 +1,12 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+// import todoService from "../services/jsonServerTodos";
+import todoService from "../services/todos";
 import Scenery from "../components/Scenery";
 import TodoHeader from "../components/TodoHeader";
 import TodoInput from "../components/TodoInput";
 import TodoMain from "../components/TodoMain";
 import TodoFooter from "../components/TodoFooter";
-import CurrentTodos from "../database/CurrentTodos";
 import styled from "styled-components";
-import { nanoid } from "nanoid";
 
 const Reminder = styled.div`
   color: #a4a4a4;
@@ -14,7 +14,7 @@ const Reminder = styled.div`
   margin-top: 35px;
   font-family: var(--card-fonttype);
   text-align: center;
-`
+`;
 
 const statusFilter = {
   All: () => true,
@@ -23,37 +23,68 @@ const statusFilter = {
 };
 
 const Root = () => {
-  const [todos, setTodos] = useState(() => CurrentTodos);
+  const [todos, setTodos] = useState([]);
   const [currentView, setCurrentView] = useState("All");
 
-  const toggleTodo = (id) => {
-    const updatedTodos = todos.map((todo) =>
-      todo.id === id ? { ...todo, isCompleted: !todo.isCompleted } : todo
-    );
-    setTodos(updatedTodos);
+  // fetch current todos
+  useEffect(() => {
+    todoService
+      .getAll()
+      .then((currentTodos) => setTodos(currentTodos))
+      .catch((err) => console.log("Error fetching todos:", err));
+  }, []);
+
+  const addTodo = (todoDetail) => {
+    const newTodo = {
+      detail: todoDetail,
+      isCompleted: false,
+    };
+    todoService
+      .create(newTodo)
+      .then((savedTodo) => {
+        setTodos((todos) => todos.concat(savedTodo));
+      })
+      .catch((err) => {
+        console.log("Error adding todos:", err);
+      });
   };
 
   const removeTodo = (removeId) => {
-    const newTodos = todos.filter(({ id }) => id !== removeId);
-    setTodos(newTodos);
+    todoService
+      .remove(removeId)
+      .then(() => {
+        const newTodos = todos.filter(({ id }) => id !== removeId);
+        setTodos(newTodos);
+      })
+      .catch((err) => {
+        console.log("Error removing a todo:", err);
+      });
   };
 
-  const addTodo = (todoDetail) => {
-    setTodos((todos) =>
-      todos.concat({
-        id: nanoid(),
-        detail: todoDetail,
-        isCompleted: false,
+  const toggleTodo = (toggleId) => {
+    const index = todos.findIndex(({ id }) => id === toggleId);
+    todoService
+      .update(todos[index].id, { isCompleted: !todos[index].isCompleted })
+      .then((savedTodo) => {
+        setTodos((prevTodos) =>
+          prevTodos.map((todo, id) => (id === index ? savedTodo : todo))
+        );
       })
-    );
+      .catch((err) => console.log("Error toggle todos:", err));
   };
 
   const clearCompleted = () => {
-    setTodos((todos) => todos.filter(({ isCompleted }) => !isCompleted));
-    console.log(
-      "clear completed:",
-      todos.filter(({ isCompleted }) => !isCompleted)
-    );
+    const uncompletedTodos = todos.filter(({ isCompleted }) => !isCompleted);
+    const idsToDelete = todos
+      .filter(({ isCompleted }) => isCompleted)
+      .map(({ id }) => id);
+
+    todoService
+      .removeCompleted(idsToDelete)
+      .then(() => {
+        setTodos(uncompletedTodos);
+      })
+      .catch((err) => console.log("Error clearing all completed todos:", err));
   };
 
   const selectView = (selectedView) => setCurrentView(selectedView);
@@ -64,6 +95,8 @@ const Root = () => {
     newTodos.splice(hoverId, 0, todos[dragId]);
     setTodos(newTodos);
   };
+
+  console.log("todos:", todos);
 
   return (
     <>
@@ -84,9 +117,7 @@ const Root = () => {
           selectView={selectView}
           clearCompleted={clearCompleted}
         />
-        <Reminder>
-          Drag and drop to reorder list
-        </Reminder>
+        <Reminder>Drag and drop to reorder list</Reminder>
       </div>
     </>
   );

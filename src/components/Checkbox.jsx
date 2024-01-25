@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { DarkModeContext } from "../hooks/DarkModeContext";
+import ModeContext from "../hooks/ModeContext";
 import styled, { css } from "styled-components";
 import "../App.css";
 
@@ -63,7 +63,7 @@ const Label = styled.label`
 `;
 
 const Checkbox = ({ id, isCompleted, toggleTodo }) => {
-  const { darkMode } = useContext(DarkModeContext);
+  const { darkMode } = useContext(ModeContext);
 
   const handleCheck = () => {
     toggleTodo(id);
