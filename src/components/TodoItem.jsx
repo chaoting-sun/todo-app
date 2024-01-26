@@ -128,12 +128,14 @@ const TodoItem = memo(function TodoItem({
 
   drag(drop(ref));
 
+  console.log("test:", index, handlerId);
+
   return (
     <Item
       ref={ref}
       onMouseEnter={() => setOnHover(true)}
       onMouseLeave={() => setOnHover(false)}
-      data-hanlder-id={handlerId}
+      data-handler-id={handlerId}
       $darkMode={darkMode}
     >
       <Checkbox id={id} isCompleted={isCompleted} toggleTodo={toggleTodo} />

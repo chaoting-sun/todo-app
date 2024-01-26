@@ -26,7 +26,7 @@ const ItemList = styled.ul`
 const TodoMain = ({ todos, toggleTodo, todoFilter, removeTodo, moveTodo }) => {
   const { darkMode } = useContext(ModeContext);
 
-  const todoList = todos
+  const itemList = todos
     .filter(todoFilter)
     .map((todo, index) => (
       <TodoItem
@@ -44,7 +44,7 @@ const TodoMain = ({ todos, toggleTodo, todoFilter, removeTodo, moveTodo }) => {
   return (
     <DndProvider backend={HTML5Backend}>
       <Main $darkMode={darkMode}>
-        <ItemList>{todoList}</ItemList>
+        <ItemList>{itemList}</ItemList>
       </Main>
     </DndProvider>
   );

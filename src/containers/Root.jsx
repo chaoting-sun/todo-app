@@ -96,8 +96,6 @@ const Root = () => {
     setTodos(newTodos);
   };
 
-  console.log("todos:", todos);
-
   return (
     <>
       <Scenery />
