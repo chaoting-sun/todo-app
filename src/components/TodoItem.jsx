@@ -128,8 +128,6 @@ const TodoItem = memo(function TodoItem({
 
   drag(drop(ref));
 
-  console.log("test:", index, handlerId);
-
   return (
     <Item
       ref={ref}
