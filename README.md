@@ -31,8 +31,8 @@ The **Todo App** has the following function:
 ## Run Locally
 
 ```bash
-git clone git@github.com:chaoting-sun/todo-app.git
-cd todo-app
+git clone git@github.com:chaoting-sun/todo-app-frontend.git
+cd todo-app-frontend
 
 npm install
 npm run dev
