@@ -9,10 +9,8 @@ const ModeProvider = (props) => {
   useEffect(() => {
     if (darkMode) {
       document.querySelector("html").classList.add("background-dark");
-      // document.getElementById("root").classList.add("scene-dark");
     } else {
       document.querySelector("html").classList.remove("background-dark");
-      // document.getElementById("root").classList.remove("scene-dark");
     }
   }, [darkMode]);
 
